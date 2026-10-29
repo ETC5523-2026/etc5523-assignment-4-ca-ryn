@@ -16,4 +16,5 @@ Imports:
     rlang,
     shiny
 Suggests:
+    bslib,
     ggplot2
