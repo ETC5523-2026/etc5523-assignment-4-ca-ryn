@@ -26,7 +26,7 @@
 #' summarise_trash(trash_collections) |>
 #'   dplyr::filter(missing_counts > 0)
 #' # Identify groups with missing rubbish counts
-#' @importFrom dplyr rlang .data
+#' @importFrom rlang .data
 #' @export
 
 summarise_trash <- function(data) {
