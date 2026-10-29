@@ -26,6 +26,7 @@
 #' summarise_trash(trash_collections) |>
 #'   dplyr::filter(missing_counts > 0)
 #' # Identify groups with missing rubbish counts
+#' @importFrom dplyr rlang .data
 #' @export
 
 summarise_trash <- function(data) {
@@ -37,12 +38,12 @@ summarise_trash <- function(data) {
   }
   
   data |>
-    dplyr::group_by(name, year, trash_type) |>   # groups the data by Trash Wheel, year, & rubbish category
+    dplyr::group_by(.data$name, .data$year, .data$trash_type) |>
     dplyr::summarise(
-      total_estimated = if (all(is.na(count))) { NA_real_ } 
-      else { sum(count, na.rm = TRUE) },   # calculates the total available estimated rubbish counts
-      n_collections = dplyr::n(),   # counts collection records in each group
-      missing_counts = sum(is.na(count)),   # counts how many records have missing rubbish counts
+      total_estimated = if (all(is.na(.data$count))) { NA_real_ } 
+      else { sum(.data$count, na.rm = TRUE) },
+      n_collections = dplyr::n(),
+      missing_counts = sum(is.na(.data$count)),
       .groups = "drop") |>
-    dplyr::arrange(year, name, trash_type)   # organise the table
+    dplyr::arrange(.data$year, .data$name, .data$trash_type)
 }
