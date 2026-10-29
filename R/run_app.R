@@ -9,8 +9,15 @@
 #' @return No return value; called for its side affect of launching the app.
 #' @export
 run_app <- function() {
-  if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop("Please install ggplot2 to use the Shiny app.", call. = FALSE )
+  required <- c("bslib", "ggplot2")
+  
+  missing <- required[
+    !vapply(required, requireNamespace, logical(1), quietly = TRUE)
+  ]
+  if (length(missing) > 0) {
+    stop("Please install the following packages to run the app: ",
+         paste(missing, collapse = ", "),
+         call. = FALSE)
   }
   app_dir <- system.file("app", package = "trashwheelexplorer")
   shiny::runApp(app_dir)
