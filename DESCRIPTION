@@ -13,4 +13,7 @@ Depends:
 LazyData: true
 Imports: 
     dplyr,
-    rlang
+    rlang,
+    shiny
+Suggests:
+    ggplot2
