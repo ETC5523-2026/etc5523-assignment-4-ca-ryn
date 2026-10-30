@@ -6,9 +6,11 @@
 
 This package includes a prepared data set, a summary function, and an interactive Shiny app that allows users to compare estimated rubbish counts across Trash Wheels and across time.
 
+The package documentation, function reference pages, and vignette are available on the [pkgdown website](https://etc5523-2026.github.io/etc5523-assignment-4-ca-ryn/).
+
 ## Intended user & research question
 
-**Intended user**: environmental offiers working with Baltimore's Healthy Harbour initiative.
+**Intended user**: environmental officers working with Baltimore's Healthy Harbour initiative.
 
 **Research question**: how have the types and estimated quantities of rubbish collected by Baltimore's Trash Wheels varied across locations and over time?
 
