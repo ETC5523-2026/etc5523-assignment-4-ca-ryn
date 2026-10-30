@@ -1,0 +1,132 @@
+# trashwheelexplorer
+
+## Overview
+
+`trashwheelexplorer` is an R package for exploring rubbish collection
+patterns in Baltimore’s waterways.
+
+This package includes a prepared data set, a summary function, and an
+interactive Shiny app that allows users to compare estimated rubbish
+counts across Trash Wheels and across time.
+
+## Intended user & research question
+
+**Intended user**: environmental offiers working with Baltimore’s
+Healthy Harbour initiative.
+
+**Research question**: how have the types and estimated quantities of
+rubbish collected by Baltimore’s Trash Wheels varied across locations
+and over time?
+
+The Shiny app helps users delve into these patterns through
+visualisations, interactive filters, and a summary table.
+
+## Data
+
+This package contains `trash_collections` which is a data set sourced
+from TidyTuesday on the 5th March of 2024. The original data came from
+Baltimore’s Healthy Harbour initiative, which operates four Trash Wheels
+to collect rubbish from waterways.
+
+The prepared data set contains 6,951 rows and 11 variables. Each row
+represents one rubbish category for one dumpster collection. The data
+includes collection dates, Trash Wheel names, weight, volume, and
+estimated amount of seven rubbish categories.
+
+### Data preparation
+
+The data are prepared reproducibly using:
+`data-raw/trash_collections.R`. The script imports the source CSV,
+standardises column names, parses collection dates, and reshapes rubbish
+categories into long format using `pivot_longer()`.
+
+The prepared data are stored in `data/trash_collections.rda`.
+
+### Limitations
+
+Rubbish item counts are estimates, not exact counts. Missing counts do
+not necessarily indicate zero rubbish.
+
+The number of collections differs across Trash Whels and years, so raw
+totals are not always directly comparable.
+
+In the long-format data set, collection-level weight and volume are
+repeated across rubbish categories and should not be summed across these
+repeated rows.
+
+## Installation
+
+Install the development package from GitHub:
+
+``` r
+
+install.packages("remotes")
+remotes::install_github("ETC5523-2026/etc5523-assignment-4-ca-ryn")
+```
+
+## Usage
+
+Load the package:
+
+``` r
+
+library(trashwheelexplorer)
+```
+
+### Access the data set
+
+``` r
+
+head(trash_collections)
+```
+
+### Summarise rubbish collections
+
+``` r
+
+summarise_trash(trash_collections)
+```
+
+Identify the three Trash Wheel-year groups with the highest estimated
+plastic bottle counts:
+
+``` r
+
+summarise_trash(trash_collections) |>
+  dplyr::filter(trash_type == "plastic_bottles") |>
+  dplyr::slice_max(total_estimated, n = 3, with_ties = FALSE)
+```
+
+### Launch the Shiny app
+
+``` r
+
+run_app()
+```
+
+The app allows users to:
+
+- Select one or more Trash Wheels.
+- Filter collections by year(s).
+- Choose a rubbish category.
+- Compare average estimated item counts using charts.
+- Examine detailed collection summaries and missing counts.
+
+## Data sources
+
+- TidyTuesday (2024): [Trash Wheel Collection
+  Data](https://github.com/rfordatascience/tidytuesday/tree/main/data/2024/2024-03-05)
+- Original source: [Baltimore Healthy
+  Harbour](https://www.mrtrashwheel.com/)
+
+## Licence
+
+The R package code is licenced under the MIT Licence. The original data
+set remains subject to its source terms.
+
+## AI-use declaration
+
+ChatGPT was used to assist with refining R code, debugging errors,
+developing the Shiny app, and checking my package documentation. All
+generated code and suggestions were reviewed, tested, and adapted
+throughout the development.
