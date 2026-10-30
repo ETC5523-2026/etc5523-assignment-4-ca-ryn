@@ -129,7 +129,7 @@ Users should examine the number of records and missing observations before inter
 - The data are historical rather than live. 
 - Item counts are estimated and may contain missing values.
 - Trash Wheels have different operating periods and collection frequencies, which limits direct comparisons.
-- This data set describes capture rubbish, not all rubbish present in Baltimore's waterways.
+- This data set describes captured rubbish, not all rubbish present in Baltimore's waterways.
 
 ## Conclusion
 
