@@ -37,10 +37,8 @@ Install the development package from GitHub:
 
 ```r
 install.packages("remotes")
-remotes::install_github("USER/etc5523-assignment-4-ca-ryn")
+remotes::install_github("ETC5523-2026/etc5523-assignment-4-ca-ryn")
 ```
-
-Replace `USER` with the GitHub account or organisation that owns the repository.
 
 ## Usage
 Load the package:
