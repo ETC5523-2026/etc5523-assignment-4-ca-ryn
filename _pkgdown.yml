@@ -1,21 +1,17 @@
+url: https://etc5523-2026.github.io/etc5523-assignment-4-ca-ryn/
 template:
   bootstrap: 5
   bootswatch: flatly
-  
 home:
   title: Baltimore Trash Wheel Explorer
-  
 reference:
-  - title: Dataset
-    contents:
-      - trash_collections
-      
-  - title: Functions
-    contents: 
-      - summarise_trash
-      - run_app
-      
+- title: Dataset
+  contents: trash_collections
+- title: Functions
+  contents:
+  - summarise_trash
+  - run_app
 articles:
-  - title: Getting Started
-    contents:
-      - getting-started
+- title: Getting Started
+  contents: getting-started
+

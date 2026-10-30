@@ -21,4 +21,8 @@ Imports:
     shiny
 Suggests:
     bslib,
-    ggplot2
+    ggplot2,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+URL: https://etc5523-2026.github.io/etc5523-assignment-4-ca-ryn/
