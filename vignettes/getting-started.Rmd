@@ -1,0 +1,143 @@
+---
+title: "Exploring Baltimore Trash Wheel Collections"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploring Baltimore Trash Wheel Collections}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+
+The `trashwheelexplorer` package helps environmental officers investigate rubbish collection patterns across Baltimore's Trash Wheels.
+
+This package includes an organised data set, a summary function, and an interactive Shiny app.
+
+**Intended user**: environmental officers working with Baltimore's Healthy Harbour initative.
+
+**Research question**: how have the types and estimate quantities of rubbish collected by Baltimore's Trash Wheels varied across locations and over time?
+
+## Installation
+
+Install the package from GitHub:
+
+```{r installation, eval=FALSE}
+install.packages("remotes")
+
+remotes::install_github("ETC5523-2026/etc5523-assignment-4-ca-ryn")
+```
+
+Load the installed package:
+
+```{r setup}
+library(trashwheelexplorer)
+```
+
+## Exploring the data set
+
+This package includes `trash_collections`, a prepared data set containing collection records for four Baltimore Trash Wheels. 
+
+Each row represents a rubbish category associated with one dumpster collection.
+
+```{r view-data}
+head(trash_collections)
+```
+
+The key variables include:
+
+- `name`: Trash Wheel name.
+- `year`: year of collection.
+- `trash_type`: rubbish category.
+- `count`: estimated number of collected items.
+
+The item counts are estimates, and missing values should not be interpreted as zero.
+
+## Summarising rubbish collections
+
+The exported `summarise_trash()` function calculates estimated item totals for each Trash Wheel, year, and rubbish category.
+
+```{r summary}
+trash_summary <- summarise_trash(trash_collections)
+
+head(trash_summary)
+```
+
+The summary includes total estimated counts, collection records, and missing observations.
+
+For instance, we can investigate plastic bottle collections:
+
+```{r plastic-bottles}
+plastic_summary <- trash_summary |>
+  dplyr::filter(trash_type == "plastic_bottles") |>
+  dplyr::slice_max(total_estimated, n = 5, with_ties = FALSE)
+
+plastic_summary
+```
+
+This identifies five Trash Wheel-year groups with the highest reported estimated plastic bottle totals.
+
+However, the number of recorded collections differs across locations and years. Larger totals do not necessarily mean that a Trash Wheel collected more rubbish per collection.
+
+## Launching the Shiny app
+
+Launch the interactive dashboard using:
+
+```{r launch-app, eval=FALSE}
+run_app()
+```
+
+The app opens in the RStudio Viewer or a web browser.
+
+## Using the interactive controls
+
+The dashboard provides three main controls:
+
+1. **Select Trash Wheels**: choose Trash Wheel(s) to compare collection patterns across locations.
+2. **Select year range**: adjust the year slider to focus on a specific period; this allows users to investigate whether patterns differ between earlier and later years.
+3. **Select rubbish category**: choose a category such as plastic bottles or cigarette butts - both charts and the summary table automatically update information for that category.
+
+For example, an environmental officer can select two Trash Wheels, choose plastic bottles, and examine the years in which both were operating.
+
+This allows a more targeted comparison than a single static chart showing all locations, years, and rubbish categories.
+
+## Interpreting the outputs 
+
+### Annual trend chart
+
+The line chart displays the average estimated number of selected items per reported collection for each year.
+
+A higher point indicates a higher estimated item count per reported collection, not necessarily a greater total amount of pollution.
+
+The chart is useful for identifying patterns over time, but differences may reflect collection conditions, reporting patterns, and periods of operation.
+
+### Trash Wheel comparison chart
+
+The bar chart compares average estimated counts per reported collections across selected Trash Wheels.
+
+Longer bars indicate higher averages for the chosen rubbish category.
+
+These values are descriptive comparisons and should not be interpreted as proof that one waterway is more polluted than the other.
+
+### Detailed summary table
+
+The table provides estimated totals, collection counts, missing counts, and average estimated counts.
+
+Users should examine the number of records and missing observations before interpreting differences. For instance, a high total based on many collections is not directly comparable with a lower total based on fewer collections.
+
+## Limitations
+
+- The data are historical rather than live. 
+- Item counts are estimated and may contain missing values.
+- Trash Wheels have different operating periods and collection frequencies, which limits direct comparisons.
+- This data set describes capture rubbish, not all rubbish present in Baltimore's waterways.
+
+## Conclusion
+
+The `trashwheelexplorer` package provides a reproducible way to investigate collection patterns. By filtering Trash Wheels, years and rubbish categories, environmental officers can delve into differences that would be difficult to assess from a single static display.
+
+The summary function and Shiny app support descriptive exploration while highlighting important limitations.
+
+## Data sources
+
+- [TidyTuesday Trash Wheel Data (2024)](https://github.com/rfordatascience/tidytuesday/tree/main/data/2024/2024-03-05)
+- [Baltimore Healthy Harbor](https://www.mrtrashwheel.com/)
