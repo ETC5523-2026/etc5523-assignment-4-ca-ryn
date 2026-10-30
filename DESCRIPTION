@@ -2,8 +2,12 @@ Package: trashwheelexplorer
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Caryn", "Kesuma",
+    email = "kesuma.caryn@gmail.com", role = c("aut", "cre"))
+Description: Provides a organised data set of rubbish collected by
+  Baltimore's Trash Wheels, a function for summarising estimated
+  rubbish counts, and an interactive Shiny app for exploring
+  collection patterns across locations and years.
 License: MIT + file LICENSE
 Config/roxygen2/version: 8.1.1
 Encoding: UTF-8
