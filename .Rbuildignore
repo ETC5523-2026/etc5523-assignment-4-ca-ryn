@@ -3,3 +3,9 @@
 ^LICENSE\.md$
 ^data-raw$
 ^etc5523-assignment-4-ca-ryn\.Rproj$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^doc$
+^Meta$
+^\.github$
